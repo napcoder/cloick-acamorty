@@ -7,7 +7,10 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "adb": "adb reverse tcp:9090 tcp:9090 && adb reverse tcp:3000 tcp:3000 && adb reverse tcp:9001 tcp:9001 && adb reverse tcp:8081 tcp:8081",
+    "lint": "eslint App.tsx --ext .tsx,.ts,.js",
+    "lint:fix": "eslint App.tsx --fix --ext .tsx,.ts,.js"
   },
   "dependencies": {
     "expo": "~45.0.0",
@@ -21,7 +24,28 @@
     "@babel/core": "^7.12.9",
     "@types/react": "~17.0.21",
     "@types/react-native": "~0.66.13",
+    "eslint": "^8.20.0",
+    "eslint-config-universe": "^11.0.0",
+    "prettier": "^2.7.1",
     "typescript": "~4.3.5"
+  },
+  "eslintConfig": {
+    "extends": [
+      "universe/native",
+      "universe/shared/typescript-analysis"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "*.ts",
+          "*.tsx",
+          "*.d.ts"
+        ],
+        "parserOptions": {
+          "project": "./tsconfig.json"
+        }
+      }
+    ]
   },
   "private": true
 }
