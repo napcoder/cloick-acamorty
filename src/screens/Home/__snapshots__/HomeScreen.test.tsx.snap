@@ -35,6 +35,7 @@ exports[`HomeScreen Renders snapshot correctly 1`] = `
     }
   >
     <Text
+      accessibilityRole="header"
       style={
         Array [
           Object {

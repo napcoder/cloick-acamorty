@@ -4,7 +4,7 @@ export default function HomeScreen() {
   return (
     <SafeContainer>
       <TitleContainer>
-        <Title>Cloick Acamorty</Title>
+        <Title accessibilityRole="header">Cloick Acamorty</Title>
       </TitleContainer>
     </SafeContainer>
   )
