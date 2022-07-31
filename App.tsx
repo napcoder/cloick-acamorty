@@ -1,3 +1,4 @@
+import Constants from 'expo-constants'
 import { StatusBar } from 'expo-status-bar'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Provider } from 'react-redux'
@@ -6,8 +7,13 @@ import Navigation from './src/navigation'
 import { setupStore } from './src/redux/store'
 
 const store = setupStore()
+let storybook
 
-export default function App() {
+if (Constants.manifest?.extra?.startStorybook) {
+  storybook = require('./storybook').default
+}
+
+function App() {
   return (
     <Provider store={store}>
       <SafeAreaProvider>
@@ -17,3 +23,5 @@ export default function App() {
     </Provider>
   )
 }
+
+export default Constants.manifest?.extra?.startStorybook ? storybook : App

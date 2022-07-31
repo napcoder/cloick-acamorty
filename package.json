@@ -9,17 +9,20 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "adb": "adb reverse tcp:9090 tcp:9090 && adb reverse tcp:3000 tcp:3000 && adb reverse tcp:9001 tcp:9001 && adb reverse tcp:8081 tcp:8081",
-    "lint": "eslint App.tsx src --ext .tsx,.ts,.js",
-    "lint:fix": "eslint App.tsx src --fix --ext .tsx,.ts,.js",
+    "lint": "eslint App.tsx src storybook --ext .tsx,.ts,.js",
+    "lint:fix": "yarn lint --fix",
     "test": "jest --verbose --passWithNoTests --coverage=false ",
     "test:watch": "yarn test --watch",
     "updateSnapshots": "jest -u --coverage=false",
-    "testFinal": "jest --passWithNoTests"
+    "testFinal": "jest --passWithNoTests",
+    "storybook": "start-storybook -p 7007",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@react-navigation/native": "^6.0.11",
     "@react-navigation/native-stack": "^6.7.0",
     "@reduxjs/toolkit": "^1.8.3",
+    "dotenv": "^16.0.1",
     "expo": "~45.0.0",
     "expo-status-bar": "~1.3.0",
     "jest": "^26.6.3",
@@ -34,12 +37,20 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@storybook/addon-actions": "^5.3",
+    "@storybook/addon-knobs": "^5.3",
+    "@storybook/addon-links": "^5.3",
+    "@storybook/addon-ondevice-actions": "^5.3.23",
+    "@storybook/addon-ondevice-knobs": "^5.3.26",
+    "@storybook/react-native": "^5.3.25",
+    "@storybook/react-native-server": "^5.3.23",
     "@testing-library/jest-native": "^4.0.5",
     "@testing-library/react-native": "^11.0.0",
     "@types/jest": "^28.1.6",
     "@types/react": "~17.0.21",
     "@types/react-native": "~0.66.13",
     "@types/react-test-renderer": "17",
+    "babel-loader": "^8.2.5",
     "eslint": "^8.20.0",
     "eslint-config-universe": "^11.0.0",
     "prettier": "^2.7.1",
@@ -73,7 +84,13 @@
   },
   "jest": {
     "preset": "jest-expo",
-    "setupFilesAfterEnv": ["@testing-library/jest-native/extend-expect"],
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?@react-native|react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base)"
+    ],
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-native/extend-expect",
+      "<rootDir>/__mocks__/globalMock.js"
+    ],
     "collectCoverage": true,
     "collectCoverageFrom": [
       "**/*.{js,jsx,ts,tsx}",
