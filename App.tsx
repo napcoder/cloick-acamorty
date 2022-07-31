@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Provider } from 'react-redux'
 
+import useCachedResources from './src/hooks/useCachedResources'
 import Navigation from './src/navigation'
 import { setupStore } from './src/redux/store'
 
@@ -14,14 +15,20 @@ if (Constants.manifest?.extra?.startStorybook) {
 }
 
 function App() {
-  return (
-    <Provider store={store}>
-      <SafeAreaProvider>
-        <Navigation />
-        <StatusBar style="auto" />
-      </SafeAreaProvider>
-    </Provider>
-  )
+  const isLoadingComplete = useCachedResources()
+
+  if (!isLoadingComplete) {
+    return null
+  } else {
+    return (
+      <Provider store={store}>
+        <SafeAreaProvider>
+          <Navigation />
+          <StatusBar style="auto" />
+        </SafeAreaProvider>
+      </Provider>
+    )
+  }
 }
 
 export default Constants.manifest?.extra?.startStorybook ? storybook : App

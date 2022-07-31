@@ -6,7 +6,7 @@ Using the Rick & Morty API (rickandmortyapi.com) display a list of the profiles 
 The list of characters should include:
 
 - Image
--  Character information (name, species, etc).
+- Character information (name, species, etc).
 
 Clicking on a card a detail view should be opened, containing:
 
