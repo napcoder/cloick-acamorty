@@ -13,7 +13,7 @@ describe('HomeScreen', () => {
     it('Should render a title', () => {
       render(<HomeScreen />)
 
-      const title = screen.queryByRole('title')
+      const title = screen.queryByText('Cloick Acamorty')
       expect(title).toBeTruthy()
     })
   })

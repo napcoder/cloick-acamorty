@@ -24,7 +24,7 @@ function App() {
       <Provider store={store}>
         <SafeAreaProvider>
           <Navigation />
-          <StatusBar style="auto" />
+          <StatusBar style="dark" />
         </SafeAreaProvider>
       </Provider>
     )

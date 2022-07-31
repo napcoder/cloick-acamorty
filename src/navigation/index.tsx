@@ -6,8 +6,8 @@
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import DetailScreen from '../screens/DetailScreen'
-import HomeScreen from '../screens/HomeScreen'
+import DetailScreen from '../screens/Detail/DetailScreen'
+import HomeScreen from '../screens/Home/HomeScreen'
 import { RootStackParamList } from '../types'
 
 export default function Navigation() {
