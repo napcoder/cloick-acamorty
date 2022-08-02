@@ -39,19 +39,19 @@ yarn testFinal
 
 ## Storybook
 
-Storybook is a useful tool to design components and have a showcase of common components to share with team and designers. 
+Storybook is a useful tool to build components in a bottom-up Component-Driven Development way. At the end, you come with a complete showcase of common components to share with team and designers. Furthermore, you can generate automatic jest snapshots from stories.
 
-Anyway, to start Storybook few manual configurations and steps are required:
+Anyway, to start Storybook, few manual configurations and steps are required:
 1. if started, stop the metro bundler with `ctrl-c`
 1. create a `.env` file in project root folder following the `.env.example`, but set `START_STORYBOOK=true` if you want to start Storybook
-1. start the storybook server running `yarn storybook` -  new web page should be opened on the web browser, showing Storybook intro, but still in loading mode, waiting for mobile to be started
+1. (optional) start the storybook server running `yarn storybook` -  new web page should be opened on the web browser, showing Storybook intro, but still in loading mode, waiting for mobile to be started
 1. now restart the metro bundler and devices/simulator/emulator `yarn start` (alternative commands are `yarn android` or `yarn ios`)
 
-Once the application is started on mobile, you are going to see the storybook showcase instead of the real app: you can now explore the navigation menu and view components, edit manual props, try some actions.
+Once the application is started on mobile, you are going to see the storybook showcase instead of the real app: you can now explore the navigation menu and view components in various states.
 
-To switch back to app, follow these steps:
+To switch back to actual app, follow these steps:
 1. stop metro bundler `ctrl-c`
-1. stop storybook server `ctrl-c`
+1. stop storybook server (if started) `ctrl-c`
 1. in file `.env` set `START_STORYBOOK=false`
 1. restart metro bundler `yarn start`
 

@@ -12,13 +12,11 @@ export const SafeContainer = styled(SafeAreaView)`
 
 export const Title = styled.Text`
   color: ${palette.black};
-  font-family: ChakraPetch_700Bold;
+  font-family: ChakraPetch-Bold;
   font-size: 32px;
   font-weight: 700;
   text-align: center;
 `
 export const TitleContainer = styled.View`
-  margin-top: 16px;
-  margin-horizontal: 16px;
-  border-radius: 8px;
+  margin: 16px 16px 30px 16px;
 `

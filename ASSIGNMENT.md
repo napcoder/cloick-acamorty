@@ -12,7 +12,8 @@ Clicking on a card a detail view should be opened, containing:
 
 - Image
 - Character information (name, species, etc).
-- Origin and location information (name, dimension, amount of residents, etc). ● Name of the chapters the character is featured on.
+- Origin and location information (name, dimension, amount of residents, etc).
+- Name of the chapters the character is featured on.
 
 The API provides REST and GraphQL versions, for this exercise you can use the one that you prefer.
 

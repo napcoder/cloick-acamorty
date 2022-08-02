@@ -55,7 +55,9 @@
     "@types/react-native": "~0.66.13",
     "@types/react-test-renderer": "17",
     "@types/styled-components-react-native": "^5.1.3",
+    "abort-controller": "^3.0.0",
     "babel-loader": "^8.2.5",
+    "cross-fetch": "^3.1.5",
     "eslint": "^8.20.0",
     "eslint-config-universe": "^11.0.0",
     "msw": "^0.44.2",
@@ -95,7 +97,8 @@
     ],
     "setupFilesAfterEnv": [
       "@testing-library/jest-native/extend-expect",
-      "<rootDir>/__mocks__/globalMock.js"
+      "<rootDir>/__mocks__/globalMock.js",
+      "./jest.setup.js"
     ],
     "collectCoverage": true,
     "collectCoverageFrom": [

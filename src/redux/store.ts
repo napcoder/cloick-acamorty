@@ -1,12 +1,17 @@
 import { configureStore, combineReducers, PreloadedState } from '@reduxjs/toolkit'
 
+import { rickAndMortyApi } from '../services/rickandmorty'
+
 // Create the root reducer separately so we can extract the RootState type
-const rootReducer = combineReducers({})
+const rootReducer = combineReducers({
+  [rickAndMortyApi.reducerPath]: rickAndMortyApi.reducer,
+})
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
   return configureStore({
     reducer: rootReducer,
     preloadedState,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(rickAndMortyApi.middleware),
   })
 }
 

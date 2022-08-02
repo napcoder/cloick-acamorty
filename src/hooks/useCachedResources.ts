@@ -19,15 +19,17 @@ export default function useCachedResources() {
 
   // Load any resources or data that we need prior to rendering the app
   useEffect(() => {
+    console.log('in use effect')
     async function loadResourcesAndDataAsync() {
+      console.log('in use effect function')
       try {
         SplashScreen.preventAutoHideAsync()
 
         // Load fonts
         await Font.loadAsync({
-          ChakraPetch_300Light,
-          ChakraPetch_400Regular,
-          ChakraPetch_700Bold,
+          'ChakraPetch-Light': ChakraPetch_300Light,
+          'ChakraPetch-Regular': ChakraPetch_400Regular,
+          'ChakraPetch-Bold': ChakraPetch_700Bold,
         })
       } catch (e) {
         // We might want to provide this error information to an error reporting service

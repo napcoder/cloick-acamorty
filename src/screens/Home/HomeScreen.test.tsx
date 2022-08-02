@@ -1,44 +1,47 @@
-import { render, screen } from '@testing-library/react-native'
+import { fireEvent, screen, waitFor } from '@testing-library/react-native'
 import { rest } from 'msw'
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { Alert } from 'react-native'
 
+import { renderWithRedux } from '../../helpers/testHelpers/renderWithRedux'
 import { server } from '../../mocks/server'
 import HomeScreen from './HomeScreen'
 
-// Establish API mocking before all tests.
-beforeAll(() => server.listen())
-// Reset any request handlers that we may add during the tests,
-// so they don't affect other tests.
-afterEach(() => server.resetHandlers())
-// Clean up after the tests are finished.
-afterAll(() => server.close())
+const createTestProps = (props: object) => ({
+  navigation: {
+    navigate: jest.fn(),
+  },
+  ...props,
+})
 
 describe('HomeScreen', () => {
-  test('Renders snapshot correctly', () => {
-    const tree = renderer.create(<HomeScreen />).toJSON()
-    expect(tree).toMatchSnapshot()
-  })
   describe('Integration', () => {
-    it('Should render a title', () => {
-      const { debug } = render(<HomeScreen />)
-      debug()
+    it('Should render the title', async () => {
+      const props: any = createTestProps({})
+      renderWithRedux(<HomeScreen {...props} />)
 
-      const title = screen.getByRole('header')
+      const title = await screen.findByRole('header')
       expect(title).toHaveTextContent('Cloick Acamorty')
     })
-    it('Should alert error when server request fails', () => {
-      server.use(rest.get('/resource', (req, res, ctx) => res(ctx.status(500))))
-      const { debug } = render(<HomeScreen />)
-      debug()
+    it('Should alert error when server request fails', async () => {
+      jest.spyOn(Alert, 'alert')
+      server.use(
+        rest.get('https://rickandmortyapi.com/api/character', (req, res, ctx) =>
+          res(ctx.status(500))
+        )
+      )
+      const props: any = createTestProps({})
+      renderWithRedux(<HomeScreen {...props} />)
 
-      const title = screen.getByRole('alert')
-      expect(title).toHaveTextContent('Sorry, something went wrong.')
+      await waitFor(() => {
+        expect(Alert.alert).toHaveBeenCalledWith('Error', 'Sorry, something went wrong.')
+      })
+      expect(Alert.alert).toHaveBeenCalledTimes(1)
     })
     it('Should display a no content element when no data received', async () => {
       server.use(
-        rest.get('/resource', (req, res, ctx) =>
-          res(
+        rest.get('https://rickandmortyapi.com/api/character*', (req, res, ctx) => {
+          return res(
             ctx.status(200),
             ctx.json({
               info: {
@@ -50,20 +53,44 @@ describe('HomeScreen', () => {
               results: [],
             })
           )
-        )
+        })
       )
-      const { debug } = render(<HomeScreen />)
-      debug()
-      expect.assertions(1)
-      await expect(screen.findAllByRole('listItem')).rejects.toThrow()
+      const props: any = createTestProps({})
+      renderWithRedux(<HomeScreen {...props} />)
+      const emptyListComponent = await screen.findByTestId('empty-characters-list-component')
+      expect(emptyListComponent).toBeTruthy()
     })
-    it('Should display 20 elements', async () => {
-      expect.assertions(2)
-      render(<HomeScreen />)
+
+    it('Should display a list', async () => {
+      const props: any = createTestProps({})
+      renderWithRedux(<HomeScreen {...props} />)
       const list = await screen.findByRole('list')
       expect(list).toBeTruthy()
-      const listItems = await screen.findAllByRole('listItem')
-      expect(listItems).toHaveLength(20)
+    })
+
+    // 10 because is n/2 as FlatList default, and fetched items are 20
+    it('Should display at least one element', async () => {
+      const props: any = createTestProps({})
+      renderWithRedux(<HomeScreen {...props} />)
+
+      const listItems = await screen.findAllByText(/#/)
+      expect(listItems.length).toBeGreaterThan(0)
+    })
+
+    it('Should go to detail of Rick', async () => {
+      const props: any = createTestProps({})
+      spyOn(props.navigation, 'navigate')
+      renderWithRedux(<HomeScreen {...props} />)
+
+      const rickItem = await screen.findByText(/Rick Sanchez/)
+      fireEvent.press(rickItem)
+
+      expect(props.navigation.navigate).toHaveBeenCalledWith(
+        'Detail',
+        expect.objectContaining({
+          character: expect.objectContaining({ id: 1, name: 'Rick Sanchez' }),
+        })
+      )
     })
   })
 })

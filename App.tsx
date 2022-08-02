@@ -8,27 +8,40 @@ import Navigation from './src/navigation'
 import { setupStore } from './src/redux/store'
 
 const store = setupStore()
-let storybook
+let StorybookUIRoot: any = () => null
 
-if (Constants.manifest?.extra?.startStorybook) {
-  storybook = require('./storybook').default
+const shouldStartStorybook = !!Constants.manifest?.extra?.startStorybook
+
+if (shouldStartStorybook) {
+  StorybookUIRoot = require('./storybook').default
 }
 
-function App() {
+function ActualApp() {
+  return (
+    <Provider store={store}>
+      <SafeAreaProvider>
+        <Navigation />
+        <StatusBar style="dark" />
+      </SafeAreaProvider>
+    </Provider>
+  )
+}
+
+export default function App() {
   const isLoadingComplete = useCachedResources()
 
   if (!isLoadingComplete) {
     return null
-  } else {
+  } else if (Constants.manifest?.extra?.startStorybook) {
     return (
-      <Provider store={store}>
-        <SafeAreaProvider>
-          <Navigation />
-          <StatusBar style="dark" />
-        </SafeAreaProvider>
-      </Provider>
+      <SafeAreaProvider>
+        <StorybookUIRoot />
+        <StatusBar style="dark" />
+      </SafeAreaProvider>
     )
+  } else {
+    return <ActualApp />
   }
 }
 
-export default Constants.manifest?.extra?.startStorybook ? storybook : App
+// export default Constants.manifest?.extra?.startStorybook ? storybook : App
