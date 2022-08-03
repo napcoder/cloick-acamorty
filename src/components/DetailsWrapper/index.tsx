@@ -17,7 +17,7 @@ export default function DetailsWrapper<
     <Container>
       <Title>{title}</Title>
       {loading ? (
-        <Spinner isVisible aside />
+        <Spinner isVisible aside testId={`${title}-spinner`} />
       ) : data == null || (Array.isArray(data) && data.length === 0) ? (
         <NoDataText>{noDataText}</NoDataText>
       ) : (

@@ -46,6 +46,15 @@ storiesOf('CharacterInfo', module)
       {...actions}
     />
   ))
+  .add('very long name', () => (
+    <CharacterInfo
+      character={{ ...character, name: 'Hole in the Wall Where the Men Can See it All' }}
+      location={location}
+      origin={origin}
+      episodes={episodes}
+      {...actions}
+    />
+  ))
   .add('wrong image', () => (
     <CharacterInfo
       location={location}

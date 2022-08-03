@@ -30,11 +30,11 @@ export default function CharacterInfo({
   return (
     <FrameContainer>
       {character.name.length > 30 ? (
-        <VeryLongName>{character.name}</VeryLongName>
+        <VeryLongName accessibilityRole="header">{character.name}</VeryLongName>
       ) : character.name.length > 20 ? (
-        <LongName>{character.name}</LongName>
+        <LongName accessibilityRole="header">{character.name}</LongName>
       ) : (
-        <Name>{character.name}</Name>
+        <Name accessibilityRole="header">{character.name}</Name>
       )}
       <Portrait
         defaultSource={require('../../../assets/image-placeholder.jpeg')}

@@ -108,7 +108,11 @@
       "!**/coverage/**",
       "!**/node_modules/**",
       "!**/babel.config.js",
-      "!**/jest.setup.js"
+      "!**/jest.setup.js",
+      "!**/*.stories*.{jsx,tsx,js,ts}",
+      "!**/storybook/**",
+      "!**/app.config.js",
+      "!**/setupTests.js"
     ]
   },
   "private": true
