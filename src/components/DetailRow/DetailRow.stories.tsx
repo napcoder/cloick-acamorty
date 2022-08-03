@@ -19,3 +19,6 @@ storiesOf('DetailRow', module)
   .add('low min width', () => <DetailRow label="Species" text="Human" labelMinWidth={5} />)
   .add('big min width', () => <DetailRow label="Species" text="Human" labelMinWidth={200} />)
   .add('borders disabled', () => <DetailRow label="Species" text="Human" enableBorder={false} />)
+  .add('long text', () => (
+    <DetailRow label="Name" text="This is a very long and interesting name, sir." />
+  ))

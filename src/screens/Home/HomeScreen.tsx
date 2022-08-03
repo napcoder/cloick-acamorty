@@ -8,7 +8,7 @@ import { SafeContainer, Title, TitleContainer } from './HomeScreenStyles'
 
 export default function HomeScreen({ navigation }: RootStackScreenProps<'Home'>) {
   // Using a query hook automatically fetches data and returns query values
-  const { data, error, isLoading } = useGetCharactersQuery('1')
+  const { data, error, isLoading } = useGetCharactersQuery(1)
   // console.log(JSON.stringify(data))
   // console.log({ isSuccess, error, isLoading })
 

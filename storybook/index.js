@@ -18,7 +18,11 @@ configure(() => {
   require('../src/components/CharactersListItem/CharactersListItem.stories')
   require('../src/components/CharactersList/CharactersList.stories')
   require('../src/components/CharacterInfo/CharacterInfo.stories')
+  require('../src/components/LocationInfo/LocationInfo.stories')
+  require('../src/components/EpisodesList/EpisodesList.stories')
   require('../src/components/DetailRow/DetailRow.stories')
+  require('../src/components/Spinner/Spinner.stories')
+  require('../src/components/DetailsWrapper/DetailsWrapper.stories')
 }, module)
 
 // Refer to https://github.com/storybookjs/react-native/tree/master/app/react-native#getstorybookui-options

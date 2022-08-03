@@ -1,4 +1,4 @@
-import { DetailLabel, Row, DetailText } from './style'
+import { DetailLabel, Row, DetailText, DetailTextContainer } from './style'
 
 interface Props {
   label: string
@@ -7,11 +7,13 @@ interface Props {
   enableBorder?: boolean
 }
 
-export default function DetailRow({ label, text, labelMinWidth = 80, enableBorder = true }: Props) {
+export default function DetailRow({ label, text, labelMinWidth = 85, enableBorder = true }: Props) {
   return (
     <Row enableBorder={enableBorder}>
       <DetailLabel minWidth={labelMinWidth}>{label}:</DetailLabel>
-      <DetailText>{text}</DetailText>
+      <DetailTextContainer>
+        <DetailText>{text}</DetailText>
+      </DetailTextContainer>
     </Row>
   )
 }
