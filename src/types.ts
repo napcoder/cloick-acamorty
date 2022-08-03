@@ -50,13 +50,13 @@ export interface Character extends ApiResourceBase {
 export interface Location extends ApiResourceBase {
   type: string
   dimension: string
-  residents: Character[]
+  residents: string[]
 }
 
 export interface Episode extends ApiResourceBase {
   air_date: string
   episode: string
-  character: string[]
+  characters: string[]
 }
 
 export interface ApiPaginatedResult<T extends Character | Location | Episode> {
