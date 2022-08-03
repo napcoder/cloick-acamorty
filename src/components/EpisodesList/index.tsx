@@ -8,9 +8,6 @@ interface Props {
 }
 
 export default function EpisodesList({ episodes, loading = false }: Props) {
-  if (!loading) {
-    console.log()
-  }
   return (
     <DetailsWrapper title="Episodes" data={episodes} noDataText="No episodes." loading={loading}>
       <>

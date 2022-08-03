@@ -11,10 +11,6 @@ interface Props {
 }
 
 export default function LocationInfo({ location, title, loading = false, locationName }: Props) {
-  if (locationName && location?.id !== 1) {
-    console.log('LOCATION - ' + locationName)
-    console.log(JSON.stringify(location))
-  }
   return (
     <DetailsWrapper
       data={location}
