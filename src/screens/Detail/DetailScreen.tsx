@@ -1,5 +1,6 @@
 import { skipToken } from '@reduxjs/toolkit/query/react'
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { Alert } from 'react-native'
 
 import CharacterInfo from '../../components/CharacterInfo'
 import { useGetEpisodesByIdsQuery, useGetLocationByIdQuery } from '../../services/rickandmorty'
@@ -22,9 +23,11 @@ export default function DetailScreen({ route }: RootStackScreenProps<'Detail'>) 
     [character.episode]
   )
 
+  const [alertOpened, setAlertOpened] = useState<boolean>(false)
+
   const {
     isLoading: isLoadingLocation,
-    isError: isErrorrLocation,
+    isError: isErrorLocation,
     data: location,
   } = useGetLocationByIdQuery(locationId || skipToken)
 
@@ -39,6 +42,13 @@ export default function DetailScreen({ route }: RootStackScreenProps<'Detail'>) 
     isError: isErrorEpisodes,
     data: episodes,
   } = useGetEpisodesByIdsQuery(episodeIds || skipToken)
+
+  useEffect(() => {
+    if (!alertOpened && (isErrorLocation || isErrorOrigin || isErrorEpisodes)) {
+      setAlertOpened(true)
+      Alert.alert('Error', 'Something went wrong while retrieving character data.')
+    }
+  })
 
   return (
     <RootContainer edges={['bottom']}>
