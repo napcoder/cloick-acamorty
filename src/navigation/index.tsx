@@ -50,6 +50,7 @@ function RootNavigator() {
             fontSize: 20,
             color: palette.black,
           },
+          headerShadowVisible: false,
         })}
       />
     </Stack.Navigator>

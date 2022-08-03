@@ -15,15 +15,20 @@ export const rickAndMortyApi = createApi({
     getCharacterById: builder.query<Character, number>({
       query: (id) => `character/${id}`,
     }),
-    getLocationById: builder.query<Location, number>({
+    getLocationById: builder.query<Location, string>({
       query: (id) => `location/${id}`,
     }),
-    getEpisodesByIds: builder.query<Episode, number[]>({
-      query: (ids) => `location/${ids.join(',')}`,
+    getEpisodesByIds: builder.query<Episode[], string[]>({
+      query: (ids) => `episode/[${ids.join(',')}]`,
     }),
   }),
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetCharactersQuery, useGetCharacterByIdQuery } = rickAndMortyApi
+export const {
+  useGetCharactersQuery,
+  useGetCharacterByIdQuery,
+  useGetLocationByIdQuery,
+  useGetEpisodesByIdsQuery,
+} = rickAndMortyApi

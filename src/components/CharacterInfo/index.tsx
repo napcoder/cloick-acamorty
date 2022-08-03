@@ -17,7 +17,7 @@ interface Props {
   isLoadingEpisodes?: boolean
 }
 
-export default function CharacterDetail({
+export default function CharacterInfo({
   character,
   location,
   origin,
@@ -51,8 +51,18 @@ export default function CharacterDetail({
           <Row label="Status" text={character.status} />
           <Row label="Created" text={formattedDate} />
         </DetailContainer>
-        <LocationInfo title="Origin" location={origin} loading={isLoadingOrigin} />
-        <LocationInfo title="Location" location={location} loading={isLoadingLocation} />
+        <LocationInfo
+          title="Origin"
+          location={origin}
+          loading={isLoadingOrigin}
+          locationName={character.origin.name}
+        />
+        <LocationInfo
+          title="Location"
+          location={location}
+          loading={isLoadingLocation}
+          locationName={character.location.name}
+        />
         <EpisodesList episodes={episodes} loading={isLoadingEpisodes} />
       </ScrollView>
     </FrameContainer>

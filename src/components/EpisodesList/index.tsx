@@ -8,14 +8,20 @@ interface Props {
 }
 
 export default function EpisodesList({ episodes, loading = false }: Props) {
+  if (!loading) {
+    console.log()
+  }
   return (
     <DetailsWrapper title="Episodes" data={episodes} noDataText="No episodes." loading={loading}>
       <>
-        {(episodes ?? []).map((episode) => (
-          <EpisodeText key={episode.id}>
-            {episode.episode} - {episode.name}
-          </EpisodeText>
-        ))}
+        {(episodes ?? []).map((ep) => {
+          // console.log(JSON.stringify(ep))
+          return (
+            <EpisodeText key={ep.id}>
+              {ep.episode} - {ep.name}
+            </EpisodeText>
+          )
+        })}
       </>
     </DetailsWrapper>
   )

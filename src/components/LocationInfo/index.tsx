@@ -6,12 +6,21 @@ import DetailsWrapper from '../DetailsWrapper'
 interface Props {
   title: string
   location: Location | null | undefined
+  locationName?: string
   loading?: boolean
 }
 
-export default function LocationInfo({ location, title, loading = false }: Props) {
+export default function LocationInfo({ location, title, loading = false, locationName }: Props) {
+  if (locationName && location?.id !== 1) {
+    console.log('LOCATION - ' + locationName)
+    console.log(JSON.stringify(location))
+  }
   return (
-    <DetailsWrapper data={location} title={title} loading={loading}>
+    <DetailsWrapper
+      data={location}
+      title={title}
+      loading={loading}
+      noDataText={locationName ?? 'Unknown'}>
       <InnerLocation location={location as Location} />
     </DetailsWrapper>
   )
@@ -29,7 +38,7 @@ function InnerLocation({ location }: InnerProps) {
       <DetailRow label="Type" text={location.type} />
       <DetailRow label="Dimension" text={location.dimension} />
       <DetailRow label="Created" text={formattedDate} />
-      <DetailRow label="Residents" text={'' + location.residents.length} />
+      <DetailRow label="Residents" text={'' + location.residents?.length ?? 0} />
     </>
   )
 }
