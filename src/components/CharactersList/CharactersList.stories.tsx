@@ -19,6 +19,7 @@ const ContainerView = styled.View`
 
 export const actions = {
   onSelectItem: action('onSelectItem'),
+  onEndReached: action('onEndReached'),
 }
 storiesOf('CharactersList', module)
   .addDecorator((story) => <ContainerView>{story()}</ContainerView>)
