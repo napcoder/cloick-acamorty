@@ -19,6 +19,8 @@ export const Container = styled.View`
 `
 export const NameRow = styled.View`
   flex-direction: row;
+  flex-shrink: 1;
+  /* flex-wrap: wrap; */
 `
 
 export const Name = styled.Text`
@@ -33,6 +35,7 @@ export const LongName = styled.Text`
   font-family: ChakraPetch-Bold;
   font-size: 18px;
   line-height: 28px;
+  flex-shrink: 1;
 `
 
 export const InfoText = styled.Text`

@@ -28,6 +28,7 @@ export const rickAndMortyApi = createApi({
 // auto-generated based on the defined endpoints
 export const {
   useGetCharactersQuery,
+  useLazyGetCharactersQuery,
   useGetCharacterByIdQuery,
   useGetLocationByIdQuery,
   useGetEpisodesByIdsQuery,

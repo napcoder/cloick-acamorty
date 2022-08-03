@@ -41,7 +41,7 @@ export default function CharactersList(props: Props) {
       renderItem={renderItem}
       ListFooterComponent={renderFooter}
       onEndReached={props.onEndReached}
-      onEndReachedThreshold={15}
+      onEndReachedThreshold={2}
       showsVerticalScrollIndicator={false}
       ListEmptyComponent={renderEmpty}
     />

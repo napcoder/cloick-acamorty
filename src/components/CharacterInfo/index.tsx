@@ -5,7 +5,7 @@ import { Character, Episode, Location } from '../../types'
 import Row from '../DetailRow'
 import EpisodesList from '../EpisodesList'
 import LocationInfo from '../LocationInfo'
-import { DetailContainer, FrameContainer, LongName, Name, Portrait } from './style'
+import { DetailContainer, FrameContainer, LongName, Name, Portrait, VeryLongName } from './style'
 
 interface Props {
   character: Character
@@ -29,7 +29,9 @@ export default function CharacterInfo({
   const formattedDate = safeParseAndFormatISODate(character.created, 'PPP', 'n.a.')
   return (
     <FrameContainer>
-      {character.name.length > 20 ? (
+      {character.name.length > 30 ? (
+        <VeryLongName>{character.name}</VeryLongName>
+      ) : character.name.length > 20 ? (
         <LongName>{character.name}</LongName>
       ) : (
         <Name>{character.name}</Name>

@@ -27,6 +27,13 @@ export const LongName = styled.Text`
   text-align: center;
 `
 
+export const VeryLongName = styled.Text`
+  color: ${palette.black};
+  font-family: ChakraPetch-Bold;
+  font-size: 20px;
+  text-align: center;
+`
+
 export const Portrait = styled.Image`
   height: 300px;
   width: 300px;
