@@ -17,6 +17,8 @@ configure(() => {
   require('./stories')
   require('../src/components/CharactersListItem/CharactersListItem.stories')
   require('../src/components/CharactersList/CharactersList.stories')
+  require('../src/components/CharacterInfo/CharacterInfo.stories')
+  require('../src/components/DetailRow/DetailRow.stories')
 }, module)
 
 // Refer to https://github.com/storybookjs/react-native/tree/master/app/react-native#getstorybookui-options
